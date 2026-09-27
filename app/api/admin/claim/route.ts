@@ -1,0 +1,4 @@
+import {env} from 'cloudflare:workers';
+import {user,body,json,failure,ApiError} from '@/lib/api';
+import {db,seed} from '@/lib/store';
+export async function POST(req:Request){try{const u=await user(),data=await body(req);if(!env.ADMIN_SETUP_TOKEN||typeof data.code!=='string'||data.code.length>200)throw new ApiError(403,'Invalid setup code.');const digest=async(v:string)=>new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));const [a,b]=await Promise.all([digest(data.code),digest(env.ADMIN_SETUP_TOKEN)]);let mismatch=0;for(let i=0;i<a.length;i++)mismatch|=a[i]^b[i];if(mismatch)throw new ApiError(403,'Invalid setup code.');await seed();const r=await db().prepare('INSERT OR IGNORE INTO settings (key,value) VALUES (?,?)').bind('owner-user-id',u.userId).run();if(!r.meta.changes)throw new ApiError(409,'Owner setup is already complete.');return json({ok:true});}catch(e){return failure(e);}}

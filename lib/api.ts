@@ -1,0 +1,10 @@
+import {env} from 'cloudflare:workers';
+import {getChatGPTUser} from '@/app/chatgpt-auth';
+export class ApiError extends Error{constructor(public status:number,message:string){super(message);}}
+export async function user(){const u=await getChatGPTUser();if(!u)throw new ApiError(401,'Sign in to continue.');return u;}
+export function adminEmail(email:string){return (env.ADMIN_EMAILS||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean).includes(email.toLowerCase());}
+export async function isReviewer(u:{userId:string;email:string}){if(adminEmail(u.email))return true;if(!env.DB)return false;const owner=await env.DB.prepare('SELECT value FROM settings WHERE key=?').bind('owner-user-id').first<{value:string}>();return owner?.value===u.userId;}
+export async function admin(){const u=await user();if(!await isReviewer(u))throw new ApiError(403,'This account does not have reviewer access.');return u;}
+export async function body(req:Request){const origin=req.headers.get('origin');const allowed=env.SITE_ORIGIN||new URL(req.url).origin;if(origin && origin!==allowed && origin!==new URL(req.url).origin)throw new ApiError(403,'Cross-site requests are not allowed.');if(req.headers.get('sec-fetch-site')==='cross-site')throw new ApiError(403,'Cross-site requests are not allowed.');if(!req.headers.get('content-type')?.startsWith('application/json'))throw new ApiError(415,'Expected JSON.');if(Number(req.headers.get('content-length'))>24000)throw new ApiError(413,'Your submission is too long.');const raw=await req.text();if(raw.length>24000)throw new ApiError(413,'Your submission is too long.');try{return JSON.parse(raw);}catch{throw new ApiError(400,'Invalid request.');}}
+export function json(value:unknown,status=200){return Response.json(value,{status,headers:{'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});}
+export function failure(e:unknown){if(e instanceof ApiError)return json({error:e.message},e.status);console.error('Request failed',e);return json({error:'The service is temporarily unavailable. Your change has not been saved. Please try again.'},503);}
