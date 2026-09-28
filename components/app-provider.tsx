@@ -1,14 +1,31 @@
 'use client';
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { toast } from 'sonner';
-export type Profile = { user: { name:string; id:string } | null; saved:string[]; followed:string[]; reminders:string[]; notifications:{id:string;message:string;createdAt:string;read:number}[]; isAdmin:boolean };
-const initial:Profile={user:null,saved:[],followed:[],reminders:[],notifications:[],isAdmin:false};
-const Context=createContext({profile:initial,ready:false,refresh:async()=>{},act:async(_type:string,_id:string):Promise<boolean>=>false});
-export function AppProvider({children}:{children:React.ReactNode}) {
+import {createContext,useCallback,useContext,useEffect,useState} from 'react';
+
+export type Profile={user:{name:string;id:string}|null;saved:string[];followed:string[];reminders:string[];notifications:{id:string;message:string;createdAt:string;read:number}[];isAdmin:boolean};
+const STORAGE_KEY='signalctf.profile.v1';
+const initial:Profile={user:{name:'Local radar',id:'browser'},saved:[],followed:[],reminders:[],notifications:[],isAdmin:false};
+type ContextValue={profile:Profile;ready:boolean;refresh:()=>Promise<void>;act:(type:string,id:string)=>Promise<boolean>};
+const Context=createContext<ContextValue>({profile:initial,ready:false,refresh:async()=>{},act:async()=>false});
+
+function readProfile():Profile{
+ try{const saved=localStorage.getItem(STORAGE_KEY);return saved?{...initial,...JSON.parse(saved),user:initial.user,isAdmin:false}:initial;}catch{return initial;}
+}
+export function AppProvider({children}:{children:React.ReactNode}){
  const [profile,setProfile]=useState<Profile>(initial),[ready,setReady]=useState(false);
- const refresh=useCallback(async()=>{try {const res=await fetch('/api/profile');if(res.ok)setProfile(await res.json());}catch{}finally{setReady(true);}},[]);
- useEffect(()=>{void refresh();},[refresh]);
- async function act(type:string,id:string) { if(!profile.user){toast('Sign in to save your radar across devices.',{action:{label:'Sign in',onClick:()=>{window.location.href='/signin-with-chatgpt?return_to='+encodeURIComponent(window.location.pathname);}}});return false;} try{const r=await fetch('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,id})});const data=await r.json() as Profile & {error?:string};if(!r.ok)throw new Error(data.error||'Could not save your change.');setProfile(data);return true;}catch(err){toast.error((err as Error).message);return false;} }
+ const refresh=useCallback(async()=>{setProfile(readProfile());setReady(true);},[]);
+ useEffect(()=>{const timer=setTimeout(()=>void refresh(),0);return()=>clearTimeout(timer);},[refresh]);
+ async function act(type:string,id:string){
+  setProfile(current=>{
+   const next={...current};
+   if(type==='save')next.saved=current.saved.includes(id)?current.saved.filter(v=>v!==id):[...current.saved,id];
+   if(type==='follow')next.followed=current.followed.includes(id)?current.followed.filter(v=>v!==id):[...current.followed,id];
+   if(type==='reminder')next.reminders=current.reminders.includes(id)?current.reminders.filter(v=>v!==id):[...current.reminders,id];
+   if(type==='read-notifications')next.notifications=current.notifications.map(n=>({...n,read:1}));
+   try{localStorage.setItem(STORAGE_KEY,JSON.stringify({...next,user:undefined,isAdmin:undefined}));}catch{}
+   return next;
+  });
+  return true;
+ }
  return <Context.Provider value={{profile,ready,refresh,act}}>{children}</Context.Provider>;
 }
 export const useProfile=()=>useContext(Context);

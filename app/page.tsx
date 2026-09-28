@@ -1,4 +1,4 @@
 import { Catalog } from '@/components/catalog';
-import { catalog } from '@/lib/store';
-export const dynamic='force-dynamic';
-export default async function Home() { const data=await catalog();return <Catalog initialEvents={data.events} loadError={data.error}/>; }
+import { seedEvents } from '@/lib/catalog-data';
+export const dynamic='force-static';
+export default function Home() { return <Catalog initialEvents={seedEvents}/>; }

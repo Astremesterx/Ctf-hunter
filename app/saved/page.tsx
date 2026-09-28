@@ -1,5 +1,5 @@
 import {Catalog} from '@/components/catalog';
-import {catalog} from '@/lib/store';
-export const dynamic='force-dynamic';
+import {seedEvents} from '@/lib/catalog-data';
+export const dynamic='force-static';
 export const metadata={title:'My radar'};
-export default async function Page(){const data=await catalog();return <Catalog initialEvents={data.events} scope="saved" loadError={data.error}/>;}
+export default function Page(){return <Catalog initialEvents={seedEvents} scope="saved"/>;}
