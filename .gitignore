@@ -37,6 +37,7 @@ yarn-error.log*
 # typescript
 next-env.d.ts
 /.test-runtime/
+/.scan-runtime/
 # Checkout-local tool state; never publish it.
 /.agents/
 /.codex/

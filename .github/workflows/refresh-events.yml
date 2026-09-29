@@ -1,0 +1,33 @@
+name: Refresh CTF radar
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: refresh-ctf-events
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/refresh-events.mjs
+      - run: npm test && npm run typecheck && npm run build
+      - name: Publish reviewed source changes
+        run: |
+          git add data/candidates.json data/leads.json lib/auto-events.ts lib/refresh-checks.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'data: refresh verified CTF sources'
+          git push origin HEAD:main

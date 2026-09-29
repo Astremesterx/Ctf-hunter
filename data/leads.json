@@ -1,0 +1,30 @@
+[
+  {
+    "title": "SecLeaf Q4 CTF 2026",
+    "officialUrl": "https://ctf.secleaf.tech/",
+    "sourceUrl": "https://ctf.secleaf.tech/",
+    "discoveredAt": "2026-09-28T09:00:03.386Z",
+    "summary": "Official page differs from the published schedule or mode; review before changing the listing."
+  },
+  {
+    "title": "DomeCTF Story-driven cybersecurity CTF",
+    "officialUrl": "https://www.c0c0n.org/DomeCTF",
+    "sourceUrl": "https://www.c0c0n.org/lea-ctf.php",
+    "discoveredAt": "2026-09-28T09:00:03.386Z",
+    "summary": "Announcement discovered. Official dates and participation details need review."
+  },
+  {
+    "title": "LEA CTF 2.0 Capture The Flag for Law Enforcement",
+    "officialUrl": "https://www.c0c0n.org/lea-ctf",
+    "sourceUrl": "https://www.c0c0n.org/lea-ctf.php",
+    "discoveredAt": "2026-09-28T09:00:03.386Z",
+    "summary": "Announcement discovered. Official dates and participation details need review."
+  },
+  {
+    "title": "Breach Point II: The National Cybersecurity CTF",
+    "officialUrl": "https://www.breachpoint.live/",
+    "sourceUrl": "https://www.breachpoint.live/",
+    "discoveredAt": "2026-09-28T09:00:03.386Z",
+    "summary": "Official page differs from the published schedule or mode; review before changing the listing."
+  }
+]
