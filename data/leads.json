@@ -26,5 +26,19 @@
     "sourceUrl": "https://www.breachpoint.live/",
     "discoveredAt": "2026-09-28T09:00:03.386Z",
     "summary": "Official page differs from the published schedule or mode; review before changing the listing."
+  },
+  {
+    "title": "Capture The Flag",
+    "officialUrl": "https://csaw.io/competition/capture-the-flag",
+    "sourceUrl": "https://csaw.io/",
+    "discoveredAt": "2026-10-01T13:22:36.610Z",
+    "summary": "Announcement discovered. Official dates and participation details need review."
+  },
+  {
+    "title": "LLM CTF Attack Competition",
+    "officialUrl": "https://csaw.io/competition/llm-ctf-attack-competition",
+    "sourceUrl": "https://csaw.io/",
+    "discoveredAt": "2026-10-01T13:22:36.610Z",
+    "summary": "Announcement discovered. Official dates and participation details need review."
   }
 ]
