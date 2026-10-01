@@ -27,7 +27,7 @@ for(const name of files){
   await mkdir('.scan-runtime',{recursive:true});
   await writeFile(`.scan-runtime/${name}.mjs`,compiled);
 }
-const [{seedEvents},{sameEdition,sameEventWindow,isSafeUrl,normalizeUrl},{publicationIssues},{extractOfficialPage,extractDiscoveryLeads,robotsAllowed}]=await Promise.all([
+const [{seedEvents},{sameCatalogEdition,isSafeUrl,normalizeUrl},{publicationIssues},{extractOfficialPage,extractDiscoveryLeads,robotsAllowed}]=await Promise.all([
   import('../.scan-runtime/catalog-data.mjs'),import('../.scan-runtime/events.mjs'),import('../.scan-runtime/verification.mjs'),import('../.scan-runtime/ingestion-core.mjs')
 ]);
 const now=new Date(), checkedAt=now.toISOString(), today=now.getTime();
@@ -71,7 +71,7 @@ async function allowed(url){
 function key(event){return createHash('sha256').update(`${event.officialUrl}|${event.title.toLowerCase()}|${event.start.slice(0,4)}`).digest('hex').slice(0,16);}
 function signature(event){return JSON.stringify([event.title,event.start,event.end,event.mode,event.officialUrl,event.cancelled]);}
 function sameFact(field,a,b){return ['start','end'].includes(field)&&a&&b?Date.parse(a)===Date.parse(b):String(a||'')===String(b||'');}
-function isKnownEdition(found){return seedEvents.find(e=>sameEdition(e,found)||sameEventWindow(e,found));}
+function isKnownEdition(found){return seedEvents.find(e=>sameCatalogEdition(e,found));}
 function addLead(lead,force=false){if(!isSafeUrl(lead.officialUrl)||!force&&normalizeUrl(lead.officialUrl)===normalizeUrl(lead.sourceUrl)||leads.some(x=>normalizeUrl(x.officialUrl)===normalizeUrl(lead.officialUrl)))return;leads.push(lead);stats.leads++;}
 function credibleNew(event,url){
   if(event.verification!=='review'||!event.end||!event.start.includes('T')||!event.end.includes('T'))return false;
@@ -103,7 +103,7 @@ for(const url of pages){
       const id=key(found),sig=signature(found),prior=candidates[id];
       if(prior&&prior.signature===sig&&today-Date.parse(prior.firstSeen)>=5*3600000){
         const published={...found,id:`auto-${id}`,verification:'official',notes:['Parsed from an approved organizer page and checked on two runs at least five hours apart.','Fees, prizes, and eligibility were not inferred from announcement text.']};
-        if(!isKnownEdition(published)&&!autoEvents.some(e=>sameEdition(e,published))){autoEvents.push(published);stats.published++;}
+        if(!isKnownEdition(published)&&!autoEvents.some(e=>sameCatalogEdition(e,published))){autoEvents.push(published);stats.published++;}
         delete candidates[id];
       }else if(!prior||prior.signature!==sig)candidates[id]={event:found,firstSeen:checkedAt,signature:sig};
     }
