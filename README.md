@@ -12,6 +12,8 @@ Import this repository into Vercel and deploy with the detected Next.js defaults
 
 All public pages and event detail routes are prerendered. Event browsing never waits for a database or external scraper. Security headers are configured in `next.config.ts`.
 
+The active directory recalculates event status every 30 seconds. Events leave the default and live views at their published end time (or after the final local date when no time is announced); canceled events also leave those views. Past and canceled listings remain in the archive with their source links. An open directory tab refreshes its published catalog from Vercel roughly every ten minutes, including when the tab becomes active again.
+
 ## Local development
 
 ```sh

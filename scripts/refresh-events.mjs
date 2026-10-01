@@ -13,6 +13,8 @@ const officialWatch=[
   'https://www.foi.se/cratectf',
   'https://www.c0c0n.org/lea-ctf.php',
   'https://www.xploitxctf.me/',
+  'https://csaw.io/',
+  'https://capturetheflag.withgoogle.com/',
 ];
 const publicFeeds=[
   'https://infosec.exchange/@fluxfingers.rss',

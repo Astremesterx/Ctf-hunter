@@ -3,12 +3,12 @@ import Link from '@/components/site-link';
 import {ArrowDown,ArrowUpRight,ShieldCheck,Radio,ScanLine} from 'lucide-react';
 import {type CTFEvent,phase,verificationLabel} from '@/lib/events';
 
-export function RadarHero({events,scope}:{events:CTFEvent[];scope:'all'|'saved'|'archive'}) {
-  const upcoming=events.filter(e=>phase(e)!=='Ended'&&!e.cancelled);
-  const official=events.filter(e=>['Official source checked','Sources corroborated'].includes(verificationLabel(e))).length;
+export function RadarHero({events,scope,now}:{events:CTFEvent[];scope:'all'|'saved'|'archive';now:number}) {
+  const upcoming=events.filter(e=>['Upcoming','Live now'].includes(phase(e,now)));
+  const official=events.filter(e=>['Official source checked','Sources corroborated'].includes(verificationLabel(e,now))).length;
   const review=events.filter(e=>e.verification==='review').length;
   const sources=new Set(events.flatMap(e=>e.evidence.map(s=>new URL(s.url).hostname))).size;
-  const first=new Date();first.setUTCHours(0,0,0,0);
+  const first=new Date(now);first.setUTCHours(0,0,0,0);
   first.setUTCDate(first.getUTCDate()-((first.getUTCDay()+6)%7));
   const weeks=Array.from({length:6},(_,index)=>{
     const start=first.getTime()+index*7*86400000,end=start+7*86400000;
