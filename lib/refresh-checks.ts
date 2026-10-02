@@ -6,7 +6,7 @@ export const refreshChecks:Record<string,string>={
   "faustctf-2026": "2026-10-01T13:22:36.610Z",
   "hack-lu-2026": "2026-10-01T13:22:36.610Z",
   "patriotctf-2026": "2026-10-01T13:22:36.610Z",
-  "securinets-quals-2026": "2026-09-28T09:00:03.386Z",
+  "securinets-quals-2026": "2026-10-02T22:16:15.466Z",
   "deccan-ctf-2026": "2026-10-01T13:22:36.610Z",
   "secleaf-q4-2026": "2026-10-02T12:38:56.190Z"
 };
