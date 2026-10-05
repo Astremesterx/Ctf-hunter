@@ -8,5 +8,5 @@ export const refreshChecks:Record<string,string>={
   "patriotctf-2026": "2026-10-04T21:28:51.397Z",
   "securinets-quals-2026": "2026-10-02T22:16:15.466Z",
   "deccan-ctf-2026": "2026-10-04T21:28:51.397Z",
-  "secleaf-q4-2026": "2026-10-02T12:38:56.190Z"
+  "secleaf-q4-2026": "2026-10-05T14:44:17.485Z"
 };
