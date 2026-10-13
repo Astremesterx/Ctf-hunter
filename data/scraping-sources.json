@@ -1,0 +1,15 @@
+{
+  "organizers": [
+    {"url": "https://glacierctf.com/"},
+    {"url": "https://wolvctf.io/", "render": true},
+    {"url": "https://www.foi.se/cratectf"},
+    {"url": "https://www.c0c0n.org/lea-ctf.php"},
+    {"url": "https://www.xploitxctf.me/", "render": true},
+    {"url": "https://csaw.io/", "render": true, "followPaths": ["/competition/"]},
+    {"url": "https://capturetheflag.withgoogle.com/"}
+  ],
+  "feeds": [
+    "https://infosec.exchange/@fluxfingers.rss",
+    "https://www.reddit.com/r/ctf/.rss"
+  ]
+}

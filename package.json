@@ -12,6 +12,7 @@
     "lint": "eslint . --ignore-pattern .next",
     "audit:prod": "npm audit --omit=dev --audit-level=high",
     "test": "node scripts/test.mjs",
+    "refresh:events": "node scripts/refresh-events.mjs --scrapling",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

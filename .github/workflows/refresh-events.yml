@@ -4,27 +4,87 @@ on:
     - cron: '17 */6 * * *'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: refresh-ctf-events
   cancel-in-progress: false
 jobs:
   discover:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    outputs:
+      base_sha: ${{ steps.base.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: false
+      - id: base
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-scraping.txt
       - run: npm ci
-      - run: node scripts/refresh-events.mjs
+      - run: python -m pip install -r requirements-scraping.txt pip-audit==2.10.1
+      - run: python -m pip_audit -r requirements-scraping.txt
+      - run: python -m playwright install --with-deps chromium
+      - uses: actions/cache@v4
+        with:
+          path: .scrapling-state
+          key: scrapling-v1-${{ runner.os }}-${{ hashFiles('requirements-scraping.txt', 'scripts/scrapling_worker.py', 'data/scraping-sources.json') }}-${{ github.run_id }}
+          restore-keys: |
+            scrapling-v1-${{ runner.os }}-${{ hashFiles('requirements-scraping.txt', 'scripts/scrapling_worker.py', 'data/scraping-sources.json') }}-
+      - run: python -m unittest discover -s tests -p 'scrapling*_test.py' -v
+      - run: npm run refresh:events
       - run: npm test && npm run typecheck && npm run build
-      - name: Publish reviewed source changes
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-check-report
+          path: .scan-runtime/scraping-report.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-catalog
+          path: |
+            data/candidates.json
+            data/leads.json
+            lib/auto-events.ts
+            lib/refresh-checks.ts
+          retention-days: 1
+  publish:
+    needs: discover
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: verified-catalog
+          path: .scan-runtime/refresh-output
+      - name: Publish verified source changes
+        env:
+          EXPECTED_SHA: ${{ needs.discover.outputs.base_sha }}
         run: |
+          if [ "$(git rev-parse HEAD)" != "$EXPECTED_SHA" ]; then
+            echo 'Main changed during discovery; the next scheduled run will refresh it.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          cp .scan-runtime/refresh-output/data/candidates.json data/candidates.json
+          cp .scan-runtime/refresh-output/data/leads.json data/leads.json
+          cp .scan-runtime/refresh-output/lib/auto-events.ts lib/auto-events.ts
+          cp .scan-runtime/refresh-output/lib/refresh-checks.ts lib/refresh-checks.ts
           git add data/candidates.json data/leads.json lib/auto-events.ts lib/refresh-checks.ts
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'

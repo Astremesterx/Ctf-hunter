@@ -1,25 +1,17 @@
 import ts from 'typescript';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import path from 'node:path';
 import {lookup} from 'node:dns/promises';
 import {createHash} from 'node:crypto';
 import net from 'node:net';
+import {checkScrapling,scraplingDocument,mayFollowAnnouncement} from './scrapling-client.mjs';
 
-// Only the reviewed URLs below and existing organizer URLs are fetched. Links
-// found in social posts or in scraped HTML are recorded, never followed.
-const officialWatch=[
-  'https://glacierctf.com/',
-  'https://wolvctf.io/',
-  'https://www.foi.se/cratectf',
-  'https://www.c0c0n.org/lea-ctf.php',
-  'https://www.xploitxctf.me/',
-  'https://csaw.io/',
-  'https://capturetheflag.withgoogle.com/',
-];
-const publicFeeds=[
-  'https://infosec.exchange/@fluxfingers.rss',
-  'https://www.reddit.com/r/ctf/.rss',
-];
+// Social links remain review leads. Only explicit organizer path prefixes may
+// be followed, to one level, with the same robots and public-host checks.
+const sources=JSON.parse(await readFile('data/scraping-sources.json','utf8'));
+const useScrapling=process.argv.includes('--scrapling');
+const scraperVersion=useScrapling?checkScrapling().scrapling:null;
+const officialWatch=sources.organizers.map(source=>source.url);
+const publicFeeds=sources.feeds;
 const files=['events','verification','catalog-worldwide','catalog-expanded','auto-events','refresh-checks','catalog-data','ingestion-core'];
 for(const name of files){
   const source=await readFile(`lib/${name}.ts`,'utf8');
@@ -35,8 +27,12 @@ const candidates=JSON.parse(await readFile('data/candidates.json','utf8'));
 const leads=JSON.parse(await readFile('data/leads.json','utf8'));
 const autoEvents=(await import('../.scan-runtime/auto-events.mjs')).autoEvents;
 const refreshChecks=(await import('../.scan-runtime/refresh-checks.mjs')).refreshChecks;
-const pages=[...new Set([...seedEvents.filter(e=>e.verification!=='review').map(e=>e.officialUrl),...officialWatch])];
-const stats={checked:0,blocked:0,failed:0,matched:0,published:0,leads:0};
+const approvedPages=[...new Set([...seedEvents.filter(e=>e.verification!=='review').map(e=>e.officialUrl),...officialWatch])];
+const selected=process.argv.find(arg=>arg.startsWith('--source='))?.slice(9);
+if(selected&&!approvedPages.includes(selected))throw Error('--source must be an approved organizer URL');
+const pages=selected?[selected]:[...approvedPages];
+const seen=new Set(pages),report=[];
+const stats={checked:0,blocked:0,failed:0,matched:0,published:0,leads:0,scraplingParsed:0,rendered:0,renderFailed:0,adaptive:0,followed:0};
 
 function publicAddress(address){
   if(net.isIP(address)===4){const [a,b]=address.split('.').map(Number);return !(
@@ -82,9 +78,31 @@ function credibleNew(event,url){
   return publicationIssues(proposed,today).length===0;
 }
 for(const url of pages){
+  const sourceReport={url,status:'pending'};
+  report.push(sourceReport);
   try{
-    if(!await allowed(url)){stats.blocked++;continue;}
-    const html=await safeFetch(url);stats.checked++;
+    if(!await allowed(url)){stats.blocked++;sourceReport.status='robots-blocked';continue;}
+    let html=await safeFetch(url);stats.checked++;
+    const profile=sources.organizers.find(source=>source.url===url);
+    if(useScrapling){
+      const document=scraplingDocument(url,html,{render:!!profile?.render&&extractOfficialPage(html,url,checkedAt).length===0});
+      html=document.html;stats.scraplingParsed++;
+      if(document.rendered)stats.rendered++;
+      if(document.renderError)stats.renderFailed++;
+      if(document.adaptiveUsed)stats.adaptive++;
+      sourceReport.rendered=document.rendered;
+      sourceReport.adaptiveUsed=document.adaptiveUsed;
+      if(document.renderError)sourceReport.renderError=document.renderError;
+      let followed=0;
+      for(const link of document.links){
+        if(!isSafeUrl(link.url)||new URL(link.url).origin!==new URL(url).origin)continue;
+        addLead({title:link.title,officialUrl:link.url,sourceUrl:url,discoveredAt:checkedAt,summary:'Discovered with Scrapling. Official schedule and participation details need verification.'});
+        if(profile&&mayFollowAnnouncement(profile,link.url)&&!seen.has(link.url)&&followed<3&&stats.followed<8){
+          seen.add(link.url);pages.push(link.url);followed++;stats.followed++;
+        }
+      }
+    }
+    sourceReport.status='checked';
     for(const lead of extractDiscoveryLeads(html,url,checkedAt))if(new URL(lead.officialUrl).origin===new URL(url).origin)addLead(lead);
     for(const found of extractOfficialPage(html,url,checkedAt)){
       const existing=isKnownEdition(found);
@@ -107,9 +125,9 @@ for(const url of pages){
         delete candidates[id];
       }else if(!prior||prior.signature!==sig)candidates[id]={event:found,firstSeen:checkedAt,signature:sig};
     }
-  }catch(error){stats.failed++;console.warn(`Skipped ${new URL(url).hostname}: ${String(error).slice(0,150)}`);}
+  }catch(error){stats.failed++;sourceReport.status='failed';sourceReport.error=String(error).slice(0,160);console.warn(`Skipped ${new URL(url).hostname}: ${String(error).slice(0,150)}`);}
 }
-for(const url of publicFeeds){try{if(!await allowed(url)){stats.blocked++;continue;}const body=await safeFetch(url,600_000);for(const lead of extractDiscoveryLeads(body,url,checkedAt))addLead(lead);}catch(error){console.warn(`Feed unavailable ${new URL(url).hostname}: ${String(error).slice(0,150)}`);}}
+if(!selected)for(const url of publicFeeds){try{if(!await allowed(url)){stats.blocked++;continue;}const body=await safeFetch(url,600_000);for(const lead of extractDiscoveryLeads(body,url,checkedAt))addLead(lead);}catch(error){console.warn(`Feed unavailable ${new URL(url).hostname}: ${String(error).slice(0,150)}`);}}
 for(const [id,c] of Object.entries(candidates))if(Date.parse(c.firstSeen)<today-30*86400000||isKnownEdition(c.event))delete candidates[id];
 const cleanLeads=leads.filter(l=>Date.parse(l.discoveredAt)>today-120*86400000).slice(-150);
 if(!process.argv.includes('--dry-run')){
@@ -118,4 +136,8 @@ if(!process.argv.includes('--dry-run')){
   await writeFile('lib/auto-events.ts',`import type {CTFEvent} from './events';\n// Generated after two matching checks of an approved public organizer page.\nexport const autoEvents:CTFEvent[]=${JSON.stringify(autoEvents,null,2)};\n`);
   await writeFile('lib/refresh-checks.ts',`// Generated only when a strict official-page parser still matches a catalog event.\nexport const refreshChecks:Record<string,string>=${JSON.stringify(refreshChecks,null,2)};\n`);
 }
-console.log(JSON.stringify({...stats,candidates:Object.keys(candidates).length,autoEvents:autoEvents.length},null,2));
+const summary={...stats,candidates:Object.keys(candidates).length,autoEvents:autoEvents.length};
+await writeFile('.scan-runtime/scraping-report.json',JSON.stringify({checkedAt,scrapling:scraperVersion,summary,sources:report},null,2)+'\n');
+if(process.env.GITHUB_STEP_SUMMARY)await writeFile(process.env.GITHUB_STEP_SUMMARY,`CTF source check (${useScrapling?'Scrapling '+scraperVersion:'native'}): ${stats.checked} pages checked, ${stats.matched} official matches, ${stats.published} published, ${stats.leads} review leads. Browser: ${stats.rendered} rendered, ${stats.renderFailed} failed. Sources: ${stats.blocked} blocked, ${stats.failed} failed.\n`,{flag:'a'});
+console.log(JSON.stringify(summary,null,2));
+if(!stats.checked||useScrapling&&!stats.scraplingParsed)throw Error('No organizer documents could be checked; inspect the source report');

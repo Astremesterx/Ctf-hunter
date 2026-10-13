@@ -45,3 +45,7 @@ next-env.d.ts
 /work/
 .dev.vars*
 *.tsbuildinfo
+/.scrapling-venv/
+/.scrapling-state/
+__pycache__/
+*.pyc
