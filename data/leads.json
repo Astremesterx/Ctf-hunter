@@ -155,5 +155,12 @@
     "discoveredAt": "2026-10-13T12:03:36.913Z",
     "channel": "community",
     "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "LLM CTF Attack Competition 2026",
+    "officialUrl": "https://csaw.io/node/210",
+    "sourceUrl": "https://csaw.io/competition/llm-ctf-attack-competition",
+    "discoveredAt": "2026-10-13T22:47:59.251Z",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
   }
 ]
