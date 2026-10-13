@@ -47,5 +47,26 @@
     "sourceUrl": "https://ctf.securinets.tn/",
     "discoveredAt": "2026-10-13T00:43:19.789Z",
     "summary": "Official page differs from the published schedule or mode; review before changing the listing."
+  },
+  {
+    "title": "Capture The Flag 2026",
+    "officialUrl": "https://csaw.io/node/194",
+    "sourceUrl": "https://csaw.io/competition/capture-the-flag",
+    "discoveredAt": "2026-10-13T11:25:10.171Z",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "Capture the Flag 2025",
+    "officialUrl": "https://csaw.io/competition/capture-the-flag-25",
+    "sourceUrl": "https://csaw.io/competition/capture-the-flag",
+    "discoveredAt": "2026-10-13T11:25:10.171Z",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "LLM CTF Attack Competition 2026",
+    "officialUrl": "https://csaw.io/node/199",
+    "sourceUrl": "https://csaw.io/competition/llm-ctf-attack-competition",
+    "discoveredAt": "2026-10-13T11:25:10.171Z",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
   }
 ]
