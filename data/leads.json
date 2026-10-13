@@ -40,5 +40,12 @@
     "sourceUrl": "https://csaw.io/",
     "discoveredAt": "2026-10-01T13:22:36.610Z",
     "summary": "Announcement discovered. Official dates and participation details need review."
+  },
+  {
+    "title": "Securinets CTF Quals 2026",
+    "officialUrl": "https://ctf.securinets.tn/",
+    "sourceUrl": "https://ctf.securinets.tn/",
+    "discoveredAt": "2026-10-13T00:43:19.789Z",
+    "summary": "Official page differs from the published schedule or mode; review before changing the listing."
   }
 ]
