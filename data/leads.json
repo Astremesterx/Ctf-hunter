@@ -68,5 +68,92 @@
     "sourceUrl": "https://csaw.io/competition/llm-ctf-attack-competition",
     "discoveredAt": "2026-10-13T11:25:10.171Z",
     "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "CTF for GIRLS CTF for GIRLS",
+    "officialUrl": "https://www.seccon.jp/15/girls/ctf-for-girls.html",
+    "sourceUrl": "https://www.seccon.jp/15/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "CTF for GIRLS 第26回ワークショップ開催のお知らせ",
+    "officialUrl": "https://www.seccon.jp/15/ctf4girls_1/ctf_for_girls_26.html",
+    "sourceUrl": "https://www.seccon.jp/15/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "publishedAt": "2026-08-19T17:00:00+09:00",
+    "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "26.09.2026 Открыта регистрация на j2w autumn ctf Соревнование пройдёт 4 октября в формате personal attack-defense",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-j2w-autumn-ctf/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "24.09.2026 10 октября состоится PERM CTF 2026 Командные соревнования по информационной безопасности пройдут в Перми",
+    "officialUrl": "https://ctfnews.ru/news/10-oktyabrya-sostoitsya-perm-ctf-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "22.09.2026 Открыта регистрация на Solar CTF 2026 17-18 октября пройдёт первый CTF от компании «Солар»",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-solar-ctf-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "21.09.2026 Открыта регистрация на KubSTU CTF 2026 Autumn edition Участвовать можно из любой точки мира",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-kubstu-ctf-2026-autumn-edition/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "20.09.2026 1 октября состоится GIS STUDENT DAY 2026 Во время форума пройдёт CTF",
+    "officialUrl": "https://ctfnews.ru/news/1-oktyabrya-sostoitsya-gis-student-day-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "15.09.2026 29 сентября состоится ПРО Кибербез Уфа 2026 На конференции пройдёт финал CTF",
+    "officialUrl": "https://ctfnews.ru/news/29-sentyabrya-sostoitsya-pro-kiberbez-ufa-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "07.09.2026 18 сентября состоится CTF Meetup Разборы реальных кейсов в МИСИС",
+    "officialUrl": "https://ctfnews.ru/news/18-sentyabrya-sostoitsya-ctf-meetup/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "05.09.2026 Началась регистрация на AltayCTF 2026 Соревнование состоится 3-4 октября в Алтайском крае",
+    "officialUrl": "https://ctfnews.ru/news/nachalas-registratsiya-na-altayctf-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "31 октября X Кубок CTF России",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-x-kubok-ctf-rossii/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-10-13T12:03:36.913Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
   }
 ]
