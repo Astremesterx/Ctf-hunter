@@ -7,7 +7,7 @@ export function robotsAllowed(content:string,path:string,agent='SignalCTF'){
 }
 export function fingerprintText(html:string){return html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;|&#160;/gi,' ').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/\s+/g,' ').trim();}
 
-export type DiscoveryLead = {title:string;officialUrl:string;discoveredAt:string;sourceUrl:string;summary:string};
+export type DiscoveryLead = {title:string;officialUrl:string;discoveredAt:string;sourceUrl:string;summary:string;channel?:string;announcementUrl?:string;publishedAt?:string};
 // Feed publication timestamps are never treated as competition start dates.
 export function extractDiscoveryLeads(html:string,sourceUrl:string,checkedAt:string):DiscoveryLead[]{
  const leads:DiscoveryLead[]=[];

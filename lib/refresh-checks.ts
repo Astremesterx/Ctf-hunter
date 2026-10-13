@@ -1,6 +1,6 @@
 // Generated only when a strict official-page parser still matches a catalog event.
 export const refreshChecks:Record<string,string>={
-  "sunshinectf-2026": "2026-09-28T08:56:33.847Z",
+  "sunshinectf-2026": "2026-10-13T11:46:03.525Z",
   "the-catch-2026": "2026-10-11T05:50:16.422Z",
   "lea-ctf-2026": "2026-10-11T05:50:16.422Z",
   "faustctf-2026": "2026-10-11T05:50:16.422Z",

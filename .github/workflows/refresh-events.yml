@@ -2,6 +2,8 @@ name: Refresh CTF radar
 on:
   schedule:
     - cron: '17 */6 * * *'
+    # Full organizer, community, RSS and public social sweep: 06:17 IST daily.
+    - cron: '47 0 * * *'
   workflow_dispatch:
 permissions:
   contents: read
@@ -40,7 +42,15 @@ jobs:
           restore-keys: |
             scrapling-v1-${{ runner.os }}-${{ hashFiles('requirements-scraping.txt', 'scripts/scrapling_worker.py', 'data/scraping-sources.json') }}-
       - run: python -m unittest discover -s tests -p 'scrapling*_test.py' -v
-      - run: npm run refresh:events
+      - name: Discover and verify events
+        env:
+          DAILY_SWEEP: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '47 0 * * *' }}
+        run: |
+          if [ "$DAILY_SWEEP" = 'true' ]; then
+            npm run refresh:events -- --daily
+          else
+            npm run refresh:events
+          fi
       - run: npm test && npm run typecheck && npm run build
       - uses: actions/upload-artifact@v4
         if: always()
@@ -58,6 +68,7 @@ jobs:
             data/leads.json
             lib/auto-events.ts
             lib/refresh-checks.ts
+            lib/source-health.ts
           retention-days: 1
   publish:
     needs: discover
@@ -85,7 +96,8 @@ jobs:
           cp .scan-runtime/refresh-output/data/leads.json data/leads.json
           cp .scan-runtime/refresh-output/lib/auto-events.ts lib/auto-events.ts
           cp .scan-runtime/refresh-output/lib/refresh-checks.ts lib/refresh-checks.ts
-          git add data/candidates.json data/leads.json lib/auto-events.ts lib/refresh-checks.ts
+          cp .scan-runtime/refresh-output/lib/source-health.ts lib/source-health.ts
+          git add data/candidates.json data/leads.json lib/auto-events.ts lib/refresh-checks.ts lib/source-health.ts
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

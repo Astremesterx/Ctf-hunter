@@ -1,15 +1,51 @@
 {
   "organizers": [
-    {"url": "https://glacierctf.com/"},
-    {"url": "https://wolvctf.io/", "render": true},
-    {"url": "https://www.foi.se/cratectf"},
-    {"url": "https://www.c0c0n.org/lea-ctf.php"},
-    {"url": "https://www.xploitxctf.me/", "render": true},
-    {"url": "https://csaw.io/", "render": true, "followPaths": ["/competition/"]},
-    {"url": "https://capturetheflag.withgoogle.com/"}
+    {"name": "GlacierCTF", "region": "Austria", "url": "https://glacierctf.com/"},
+    {"name": "WolvCTF", "region": "United States", "url": "https://wolvctf.io/", "render": true},
+    {"name": "Crate-CTF / FOI", "region": "Sweden", "url": "https://www.foi.se/cratectf"},
+    {"name": "LEA CTF / c0c0n", "region": "India", "url": "https://www.c0c0n.org/lea-ctf.php"},
+    {"name": "XPLOITX", "region": "India", "url": "https://www.xploitxctf.me/", "render": true},
+    {"name": "CSAW", "region": "Worldwide", "url": "https://csaw.io/", "render": true, "followPaths": ["/competition/"]},
+    {"name": "Google CTF", "region": "Worldwide", "url": "https://capturetheflag.withgoogle.com/"},
+    {"name": "CyLab Security Academy / picoCTF", "region": "United States", "url": "https://cylabacademy.org/", "followPaths": ["/posts/"]},
+    {"name": "DiceCTF", "region": "Worldwide", "url": "https://ctf.dicega.ng/"},
+    {"name": "corCTF", "region": "Worldwide", "url": "https://ctf.cor.team/"},
+    {"name": "SEKAI CTF", "region": "Worldwide", "url": "https://2026.ctf.sekai.team/", "render": true},
+    {"name": "Dragon Sector", "region": "Poland", "url": "https://dragonsector.pl/"},
+    {"name": "ASIS CTF", "region": "Worldwide", "url": "https://asisctf.com/"},
+    {"name": "Hack The Box CTF", "region": "Worldwide", "url": "https://ctf.hackthebox.com/", "render": true},
+    {"name": "Balsn", "region": "Taiwan", "url": "https://balsn.tw/"},
+    {"name": "L3ak CTF", "region": "Worldwide", "url": "https://ctf.l3ak.team/", "render": true},
+    {"name": "hxp", "region": "Germany", "url": "https://hxp.io/blog/", "followPaths": ["/blog/"]},
+    {"name": "European Cybersecurity Challenge", "region": "Europe", "url": "https://ecsc2026.de/event/"},
+    {"name": "DownUnderCTF", "region": "Australia / New Zealand", "url": "https://downunderctf.com/", "followPaths": ["/blog/"]},
+    {"name": "amateursCTF", "region": "Worldwide", "url": "https://ctf.amateurs.team/"},
+    {"name": "InCTF", "region": "India", "url": "https://inctf.in/"},
+    {"name": "Nullcon / HackIM", "region": "India / Germany", "url": "https://nullcon.net/"},
+    {"name": "SECCON", "region": "Japan", "url": "https://www.seccon.jp/15/", "followPaths": ["/15/"]}
+  ],
+  "communities": [
+    {"name": "CTF7 organizer announcements", "url": "https://ctf7.com/"},
+    {"name": "CTF News events", "url": "https://ctfnews.ru/events/"}
   ],
   "feeds": [
     "https://infosec.exchange/@fluxfingers.rss",
-    "https://www.reddit.com/r/ctf/.rss"
+    "https://www.reddit.com/r/ctf/.rss",
+    "https://www.reddit.com/r/securityCTF/.rss",
+    "https://blog.dragonsector.pl/feeds/posts/default?alt=rss&max-results=10"
+  ],
+  "social": [
+    {"platform": "instagram", "name": "InCTF", "url": "https://www.instagram.com/inctf.in/", "verifiedFrom": "https://inctf.in/"},
+    {"platform": "instagram", "name": "ECSC", "url": "https://www.instagram.com/ecsc.eu/", "verifiedFrom": "https://ecsc2026.de/"},
+    {"platform": "instagram", "name": "Hack The Box", "url": "https://www.instagram.com/hackthebox/", "verifiedFrom": "https://www.hackthebox.com/"},
+    {"platform": "instagram", "name": "CTF7", "url": "https://www.instagram.com/ctf7.official/", "verifiedFrom": "https://ctf7.com/"},
+    {"platform": "x", "name": "InCTF", "url": "https://x.com/InCTF", "verifiedFrom": "https://inctf.in/"},
+    {"platform": "x", "name": "Nullcon", "url": "https://x.com/nullcon", "verifiedFrom": "https://nullcon.net/"},
+    {"platform": "x", "name": "ECSC", "url": "https://x.com/ECSC_openECSC", "verifiedFrom": "https://ecsc2026.de/"},
+    {"platform": "x", "name": "Hack The Box", "url": "https://x.com/hackthebox_eu", "verifiedFrom": "https://www.hackthebox.com/"},
+    {"platform": "x", "name": "CTF7", "url": "https://x.com/CTF7_official", "verifiedFrom": "https://ctf7.com/"},
+    {"platform": "facebook", "name": "Nullcon", "url": "https://www.facebook.com/nullcon", "verifiedFrom": "https://nullcon.net/"},
+    {"platform": "facebook", "name": "Hack The Box", "url": "https://www.facebook.com/hackthebox.eu", "verifiedFrom": "https://www.hackthebox.com/"},
+    {"platform": "facebook", "name": "CTF7", "url": "https://www.facebook.com/ctf7.official", "verifiedFrom": "https://ctf7.com/"}
   ]
 }

@@ -10,6 +10,7 @@ import logging
 import re
 import socket
 import sys
+from datetime import datetime, timezone
 from importlib.metadata import version
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
@@ -114,6 +115,27 @@ def render_document(url, html):
     return result
 
 
+def link_publication_date(anchor):
+    parent = anchor.parent
+    for _ in range(4):
+        if parent is None:
+            break
+        times = parent.css('time::attr(datetime)')
+        if len(times) == 1:
+            return str(times[0])[:100]
+        metadata = parent.css('.post-meta')
+        if len(metadata) == 1:
+            text = str(metadata[0].get_all_text(separator=' ', strip=True))
+            match = re.search(r'\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*(\d{1,2}\s+[A-Z][a-z]+\s+20\d{2})', text)
+            if match:
+                try:
+                    return datetime.strptime(match[1], '%d %B %Y').replace(tzinfo=timezone.utc).isoformat()
+                except ValueError:
+                    pass
+        parent = parent.parent
+    return None
+
+
 def parse_document(url, html, state_dir=STATE):
     if not public_url(url) or len(html.encode('utf-8')) > MAX_HTML:
         raise ValueError('Invalid input document')
@@ -136,13 +158,55 @@ def parse_document(url, html, state_dir=STATE):
                 continue
             if re.search(r'login|sign.?in|logout|register|scoreboard|privacy|rules|challenge', urlsplit(target).path, re.I):
                 continue
-            links.append({'title': title[:150], 'url': target})
+            published = link_publication_date(anchor)
+            links.append({'title': title[:150], 'url': target, **({'publishedAt': published} if published else {})})
             seen.add(target)
             if len(links) >= 24:
                 break
         if len(links) >= 24:
             break
-    return {'url': url, 'html': html, 'links': links, 'adaptiveUsed': adaptive_used, 'rendered': False}
+    social_posts = []
+    for anchor in page.css('a[href]'):
+        target = urljoin(url, anchor.attrib['href'])
+        if social_permalink(target) and target not in social_posts:
+            social_posts.append(target)
+        if len(social_posts) >= 12:
+            break
+    return {'url': url, 'html': html, 'links': links, 'socialPosts': social_posts, 'adaptiveUsed': adaptive_used, 'rendered': False}
+
+
+def social_permalink(url, platform=None):
+    if not public_url(url):
+        return False
+    parsed = urlsplit(url)
+    host, path = parsed.hostname.removeprefix('www.'), parsed.path
+    found = 'instagram' if host == 'instagram.com' else 'x' if host in ('x.com', 'twitter.com') else 'facebook' if host == 'facebook.com' else None
+    if not found or platform and platform != found:
+        return False
+    return bool(re.fullmatch(r'/(?:p|reel)/[\w-]+/?', path)) if found == 'instagram' else bool(re.fullmatch(r'/\w+/status/\d+/?', path)) if found == 'x' else bool(re.fullmatch(r'/(?:[^/]+/posts/[^/]+|events/\d+)/?', path) or path == '/permalink.php' and re.search(r'(?:^|&)story_fbid=\d+(?:&|$)', parsed.query))
+
+
+def parse_social_document(url, html, platform):
+    if not public_url(url) or len(html.encode('utf-8')) > MAX_HTML:
+        raise ValueError('Invalid social document')
+    page = Selector(html, huge_tree=False)
+    posts, seen = [], set()
+    for article in page.css('article, [data-testid="tweet"], [role="article"]'):
+        links = [link for anchor in article.css('a[href]') if len(link := urljoin(url, anchor.attrib['href'])) <= 2048]
+        permalink = next((link for link in links if social_permalink(link, platform)), None)
+        if not permalink or permalink in seen:
+            continue
+        seen.add(permalink)
+        posts.append({'url': permalink, 'text': str(article.get_all_text(separator=' ', strip=True))[:2000], 'links': links[:30], 'publishedAt': article.css('time::attr(datetime)').get()})
+        if len(posts) >= 24:
+            break
+    if not posts and social_permalink(url, platform):
+        description = page.css('meta[property="og:description"]::attr(content), meta[name="description"]::attr(content)').get()
+        if description:
+            posts.append({'url': url, 'text': description[:2000], 'links': [], 'publishedAt': None})
+    text = str(page.get_all_text(separator=' ', strip=True))
+    restricted = not posts and bool(re.search(r'log\s?in|sign\s?in|sign up to|create an account to|join.*to see', text, re.I))
+    return {'url': url, 'html': html, 'links': [], 'socialPosts': [], 'posts': posts, 'restricted': restricted, 'adaptiveUsed': False, 'rendered': False}
 
 
 def main():
@@ -160,7 +224,7 @@ def main():
         except Exception as error:
             # Preserve the static document; a failed browser never creates evidence.
             render_error = type(error).__name__
-    result = parse_document(url, html)
+    result = parse_social_document(url, html, data['social']) if data.get('social') else parse_document(url, html)
     result.update(rendered=rendered, renderError=render_error)
     print(json.dumps(result, ensure_ascii=True))
 
