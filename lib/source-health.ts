@@ -2,290 +2,290 @@ export type SourceCheck = {url:string;channel:string;status:string;checkedAt:str
 export type SourceHealth = {lastOrganizerCheck:string|null;lastDailyCheck:string|null;sources:SourceCheck[]};
 // Source status metadata only; no raw documents or credentials.
 export const sourceHealth:SourceHealth={
-  "lastOrganizerCheck": "2026-10-20T11:43:43.833Z",
+  "lastOrganizerCheck": "2026-10-20T17:13:32.685Z",
   "lastDailyCheck": "2026-10-20T05:26:55.735Z",
   "sources": [
     {
       "url": "https://sunshinectf.org/",
       "channel": "organizer",
       "status": "access-restricted",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://2026.faustctf.net/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.csa.gov.sg/news-events/events/singapore-cyber-conquest-2026/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.hkcert.org/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://pwnsec.ctf.ae/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://hack.lu/ctf/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.hitcon.org/2026/CyberRangexCTF/ctf.html",
       "channel": "organizer",
       "status": "access-restricted",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.huntress.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.thecatch.cz/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.secleaf.tech/",
       "channel": "organizer",
       "status": "unavailable",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://wpctf.it/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://pctf.competitivecyber.club/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.securinets.tn/",
       "channel": "organizer",
       "status": "access-restricted",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://2026.h7tex.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://cybersecuritychallenge.ca/en/program/",
       "channel": "organizer",
       "status": "redirect-review",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://blackalps.ch/ba-26/contest",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://csgc.cs.buap.mx/ctf/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.crate.foi.se/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.c0c0n.org/lea-ctf.php",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.xploitxctf.me/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://felicity.iiit.ac.in/infinium/events/deccan-ctf",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.breachpoint.live/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://2026.chronos-security.ro/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://bsidesphilly.org/ctf",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://glacierctf.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://wolvctf.io/",
       "channel": "organizer",
       "status": "unavailable",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.foi.se/cratectf",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://csaw.io/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://capturetheflag.withgoogle.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://cylabacademy.org/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.dicega.ng/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.cor.team/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://2026.ctf.sekai.team/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://dragonsector.pl/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://asisctf.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.hackthebox.com/",
       "channel": "organizer",
       "status": "unavailable",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://balsn.tw/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.l3ak.team/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://hxp.io/blog/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ecsc2026.de/event/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://downunderctf.com/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://ctf.amateurs.team/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://inctf.in/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://nullcon.net/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.seccon.jp/15/",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://csaw.io/competition/capture-the-flag",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://csaw.io/competition/llm-ctf-attack-competition",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://hxp.io/blog/122/hxp-39C3-CTF-Linear-algebra-vs-ePrint/",
@@ -309,13 +309,13 @@ export const sourceHealth:SourceHealth={
       "url": "https://www.seccon.jp/15/girls/ctf-for-girls.html",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.seccon.jp/15/ctf4girls_1/ctf_for_girls_26.html",
       "channel": "organizer",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.seccon.jp/15/seccon_beginners/ctf.html",
@@ -339,13 +339,13 @@ export const sourceHealth:SourceHealth={
       "url": "https://infosec.exchange/@fluxfingers.rss",
       "channel": "feed",
       "status": "checked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.reddit.com/r/ctf/.rss",
       "channel": "feed",
       "status": "robots-blocked",
-      "checkedAt": "2026-10-20T11:41:57.188Z"
+      "checkedAt": "2026-10-20T17:11:42.951Z"
     },
     {
       "url": "https://www.reddit.com/r/securityCTF/.rss",
