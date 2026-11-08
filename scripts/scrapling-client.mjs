@@ -1,4 +1,6 @@
 import {spawnSync} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {resolve} from 'node:path';
 
 const MAX_HTML = 1_500_000;
 // A crawler subprocess does not need CI tokens, proxy credentials or app secrets.
@@ -6,8 +8,16 @@ export function workerEnvironment(environment=process.env) {
   const names=['PATH','SYSTEMROOT','WINDIR','TEMP','TMP','HOME','USERPROFILE','LOCALAPPDATA','APPDATA','PLAYWRIGHT_BROWSERS_PATH'];
   return {...Object.fromEntries(Object.entries(environment).filter(([key])=>names.includes(key.toUpperCase()))),PYTHONIOENCODING:'utf-8',PYTHONUTF8:'1'};
 }
+function resolvePython() {
+  if (process.env.SCRAPLING_PYTHON) return process.env.SCRAPLING_PYTHON;
+  const win = resolve('.scrapling-venv', 'Scripts', 'python.exe');
+  const unix = resolve('.scrapling-venv', 'bin', 'python');
+  if (existsSync(win)) return win;
+  if (existsSync(unix)) return unix;
+  return 'python';
+}
 function run(input,args=[]) {
-  const result=spawnSync(process.env.SCRAPLING_PYTHON||'python',['scripts/scrapling_worker.py',...args],{
+  const result=spawnSync(resolvePython(),['scripts/scrapling_worker.py',...args],{
     input:input?JSON.stringify(input):undefined,encoding:'utf8',env:workerEnvironment(),
     timeout:45_000,maxBuffer:5_000_000,windowsHide:true,shell:false,
   });
