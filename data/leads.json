@@ -97,5 +97,69 @@
     "sourceUrl": "https://csaw.io/competition/llm-ctf-attack-competition",
     "discoveredAt": "2026-11-08T16:49:37.234Z",
     "summary": "Discovered with Scrapling. Official schedule and participation details need verification."
+  },
+  {
+    "title": "08.11.2026 miniCUT выиграла OmCTF 2026, а борьба за бронзу закончилась разницей в 40 баллов Омск защищали от провала в прошлое, а «Воду» на 1С — от же",
+    "officialUrl": "https://ctfnews.ru/news/omctf-2026-result/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "05.11.2026 HSE CTF проведёт онлайн-тренировку по Attack/Defense 29 ноября Вышка предлагает план на 29 ноября: шесть часов искать чужие ошибки и надеят",
+    "officialUrl": "https://ctfnews.ru/news/hsectf-ad-train/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "03.11.2026 Тысяча команд и ещё больше агентов: чем запомнился отбор X Кубка CTF России Четыре зачёта, 77 регионов и 44 дисквалификации. Юбилей точно з",
+    "officialUrl": "https://ctfnews.ru/news/ctfcup-2026-quals-result/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "29.10.2026 GO CTF 2026: как прошёл финал в Казани Обед, ужин, разрешённый DoS, — всё по расписанию",
+    "officialUrl": "https://ctfnews.ru/news/goctf-2026-result/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "26.10.2026 OmCTF 2026: защитить свой Омск и отправить город соперника в прошлое Регистрация открыта до полуночи 1 ноября, поторопитесь!",
+    "officialUrl": "https://ctfnews.ru/news/omctf-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "25.10.2026 Solar CTF 2026: поиск Тынды, реверс с утками и вопросы к организаторам На кону было 300 тысяч рублей и много-много уток",
+    "officialUrl": "https://ctfnews.ru/news/solarctf-2026-result/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "1 ноября X Кубок CTF России",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-x-kubok-ctf-rossii/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "7 ноября NSK CTF School 2026",
+    "officialUrl": "https://ctfnews.ru/news/otkryta-registratsiya-na-nsk-ctf-school-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-09T07:16:25.771Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
   }
 ]
