@@ -161,5 +161,21 @@
     "discoveredAt": "2026-11-09T07:16:25.771Z",
     "channel": "community",
     "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "09.11.2026 M*CTF 2026 открывает регистрацию: квалификация впервые пройдёт в Attack/Defense Участникам выдадут уязвимые сервисы и семь часов на знакомс",
+    "officialUrl": "https://ctfnews.ru/news/mctf-2026/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-10T07:50:06.258Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
+  },
+  {
+    "title": "09.11.2026 NSK CTF School 2026: архивы ALICE, рейдовые боссы и восемь баллов до победы На ивенте можно было отвлечься от взлома на убийство трёх боссо",
+    "officialUrl": "https://ctfnews.ru/news/nskctf-school-2026-result/",
+    "sourceUrl": "https://ctfnews.ru/events/",
+    "discoveredAt": "2026-11-10T07:50:06.258Z",
+    "channel": "community",
+    "summary": "Community announcement. Official organizer evidence is required before publication."
   }
 ]
