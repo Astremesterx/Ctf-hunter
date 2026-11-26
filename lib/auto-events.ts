@@ -25,34 +25,34 @@ export const autoEvents:CTFEvent[]=[
     "skill": "Not announced",
     "categories": [],
     "verification": "official",
-    "checkedAt": "2026-11-26T08:23:33.196Z",
+    "checkedAt": "2026-11-26T08:57:08.082Z",
     "evidence": [
       {
         "field": "title",
         "value": "Securinets CTF Finals 2026",
         "url": "https://ctf.securinets.tn/",
-        "checkedAt": "2026-11-26T08:23:33.196Z",
+        "checkedAt": "2026-11-26T08:57:08.082Z",
         "kind": "official"
       },
       {
         "field": "start",
         "value": "2026-12-19T10:00:00+01:00",
         "url": "https://ctf.securinets.tn/",
-        "checkedAt": "2026-11-26T08:23:33.196Z",
+        "checkedAt": "2026-11-26T08:57:08.082Z",
         "kind": "official"
       },
       {
         "field": "mode",
         "value": "In person",
         "url": "https://ctf.securinets.tn/",
-        "checkedAt": "2026-11-26T08:23:33.196Z",
+        "checkedAt": "2026-11-26T08:57:08.082Z",
         "kind": "official"
       },
       {
         "field": "end",
         "value": "2026-12-20T19:00:00+01:00",
         "url": "https://ctf.securinets.tn/",
-        "checkedAt": "2026-11-26T08:23:33.196Z",
+        "checkedAt": "2026-11-26T08:57:08.082Z",
         "kind": "official"
       }
     ],
